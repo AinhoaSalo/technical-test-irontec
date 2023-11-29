@@ -1,8 +1,27 @@
 import { Component } from '@angular/core';
 import {FormControl, Validators,} from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
+  
+  standalone: true,
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    ReactiveFormsModule,
+    MatButtonModule, 
+    MatTooltipModule, 
+    MatIconModule,
+  ],
   selector: 'tech-issues',
   templateUrl: './issues.component.html',
   styleUrl: './issues.component.scss',
