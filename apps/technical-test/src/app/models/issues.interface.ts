@@ -1,3 +1,5 @@
-export interface IssuesStateInterface {
-    data: []
+export interface DataStateInterface {
+    isLoading: boolean;
+    data: any;
+    error: any;
 }

@@ -1,16 +1,23 @@
-import { createReducer, on } from "@ngrx/store";
-import { IssuesStateInterface } from "../../models/issues.interface";
-import * as IssuesActions from './issues.actions'
+import { createFeature, createReducer, on } from "@ngrx/store";
+import { DataStateInterface } from "../../models/issues.interface";
+import { issuesActions } from "./issues.actions";
 
-export const initialState: IssuesStateInterface = {
-    data: []
 
+export const initialState: DataStateInterface = {
+    isLoading: false,
+    data: undefined,
+    error: undefined,
 }
+const issuesFeature = createFeature({
+    name: 'issues',
+    reducer: createReducer(
+        initialState,
+        on(issuesActions.issuesLoading, state => ({...state, isLoading: true}))
+    )
+})
 
-export const reducers = createReducer(
-    initialState,
-    on(IssuesActions.getIssues, (state: any) => ({
-        ...state,
-        data: []
-    }))
-)
+export const {
+    name: issuesFeatureKey, 
+    reducer: issuesReducer, 
+    selectIsLoading
+} = issuesFeature
