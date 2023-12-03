@@ -1,14 +1,53 @@
-.table-issues {
+
+.table {
+  margin-block-start: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__button {
+    padding: 1rem 4.25rem;
+    background-color: rgb(226, 215, 195);
+    color: rgb(104, 103, 103);
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  &__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-start: 5rem;
+    background-color: rgb(226, 215, 195);
+    color: rgb(104, 103, 103);
+    width: 65%;
+    min-height: 26rem;
+    border-radius: 1rem;
+
+    &__description {
+      margin-inline: 4rem;
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+  
+  &__issues{
     margin-block-start: 1rem;
+    width: 85%;
+  }
 }
 
+
 .mat-mdc-table th {
-    background-color: #E3D9C5;
+  background-color: #E3D9C5;
 }
 
 .mat-mdc-table tr:nth-child(even) {
-    background-color: rgb(238, 231, 217);
+  background-color: rgb(238, 231, 217);
 }
 .mat-mdc-table tr:nth-child(odd) {
-    background-color: #f7f4ee;
+  background-color: #f7f4ee;
 }

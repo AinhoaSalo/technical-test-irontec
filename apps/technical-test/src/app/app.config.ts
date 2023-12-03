@@ -6,6 +6,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { issuesFeatureKey, issuesReducer } from './store/issues/issues.reducers';
+import { provideEffects } from '@ngrx/effects';
+import * as issuesEffects from './store/issues/issues.effects';
 
 
 export const appConfig: ApplicationConfig = {
@@ -15,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideStore(),
     provideState(issuesFeatureKey, issuesReducer),
+    provideEffects(issuesEffects),
     provideStoreDevtools({
         maxAge: 25,
         logOnly: !isDevMode(),

@@ -6,7 +6,8 @@ export const issuesActions = createActionGroup({
     source: 'Issues',
     events:{
         'Issues data service': props<{dataService: DataServiceState}>(),
-        'Issues success': props<{data: IssueData[]}>(),
-        'Issues error': props<{error: ErrorsIssuesState}>()
+        'Issues success': props<{data: {status: number, issuesData: IssueData[]} }>(),
+        'Issues error': props<{error: ErrorsIssuesState}>(),
+        'Delete data': props<{error: undefined, data: undefined}>()
     }
 })

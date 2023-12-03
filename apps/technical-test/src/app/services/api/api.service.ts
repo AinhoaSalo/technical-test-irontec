@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Octokit } from "octokit";
-import { IssueData } from '../../models/issues-data.interface';
+import { IssueData, Issues } from '../../models/issues-data.interface';
+import { environment } from 'apps/technical-test/src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,13 @@ export class ApiService {
 
   constructor() {}
   
-  async getDataGithub(owner: string, repo: string): Promise<IssueData[]> {
+  async getDataGithub(owner: string, repo: string): Promise<Issues> {
+    let issueData: IssueData[] = [];
+    let statusApi: number = 0;
+    let token: string = environment.github_token;
+    
     const octokit = new Octokit({
-      auth: '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',
+      auth: token,
     });
     const octokitPromise = octokit.paginate.iterator({
       method: "GET",
@@ -27,9 +33,8 @@ export class ApiService {
       }
     });
 
-    let issueData: IssueData[] = []
-    
-    for await (const {data} of octokitPromise) {
+    for await (const {data, status} of octokitPromise) {
+      statusApi = status
       if (data.length === 0) {
         break;
       }
@@ -44,8 +49,11 @@ export class ApiService {
         });
       }
     }
-      
-    return issueData
+    let issues: Issues = {
+      status: statusApi,
+      issuesData: issueData
+    } 
+    return issues
   }
 
 }

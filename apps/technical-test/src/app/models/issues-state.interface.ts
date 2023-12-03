@@ -1,22 +1,29 @@
-import { IssueData } from "./issues-data.interface";
+import { Issues } from "./issues-data.interface";
 
 export interface IssuesStateInterface {
-    issues: DataStateInterface;
+  issues: DataStateInterface;
 }
 
 export interface DataStateInterface {
-    dataService: DataServiceState;
-    data: IssueData[];
-    error: ErrorsIssuesState;
+  dataService: DataServiceState;
+  data: Issues | undefined;
+  error: ErrorsIssuesState | undefined;
 }
 
 export interface DataServiceState {
-    owner: string;
-    repo: string;
+  owner: string;
+  repo: string;
 }
 
 export interface ErrorsIssuesState {
-    301: string | undefined | null,
-    404: string | undefined | null,
-    422: string | undefined | null
+  name: string,
+  status: number;
+  response: DataErrorsIssuesState;
+}
+
+export interface DataErrorsIssuesState {
+  data: {
+    message: string;
+    documentation_url: string;
+  }
 }

@@ -1,6 +1,5 @@
-import { Component,} from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { ApiService } from '../../services/api/api.service';
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from '@angular/material/input';
@@ -13,11 +12,14 @@ import { issuesActions } from '../../store/issues/issues.actions';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataStateInterface } from '../../models/issues-state.interface';
 import { TableIssuesComponent } from '../table-issues/table-issues.component';
+import { Observable } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
+    RouterModule, 
     FormsModule, 
     MatFormFieldModule, 
     MatInputModule, 
@@ -33,37 +35,38 @@ import { TableIssuesComponent } from '../table-issues/table-issues.component';
   styleUrl: './search-issues.component.scss',
 })
 export class SearchIssuesComponent {
-  validateUrl: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-  loadingTable: boolean = false;
-
+   destroyed$ = new Observable<void>(observer => {
+    const unregisterFn = this.destroyRef!.onDestroy(observer.next.bind(observer));
+    return unregisterFn;
+  });
+  
   owner: string = '';
   repo: string = '';
-
+ 
+  validateUrl: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   urlFormControl = new FormControl('', [Validators.required, Validators.pattern(this.validateUrl)]);
   constructor (
-    private apiService: ApiService,
     private store: Store<{issues: DataStateInterface}>,
+    private destroyRef?: DestroyRef
   ) {}
   
   onSubmit(): void {
     if(this.urlFormControl.valid){
-      this.loadingTable = true;
-
       this.matchUrl(this.urlFormControl?.value);
-
-      this.store.dispatch(issuesActions.issuesDataService({dataService: {
-        'owner': this.owner,
-        'repo': this.repo
-      }}));
-
-      this.apiService.getDataGithub(this.owner, this.repo).then(result => {
-        this.store.dispatch(issuesActions.issuesSuccess({data: result}));
-      }).catch((err) => {
-        this.store.dispatch(issuesActions.issuesError(err));
-      });
+      this.sendOwnerRepoApi();
     }
   }
 
+  sendOwnerRepoApi(){
+    this.store.dispatch(issuesActions.issuesDataService(
+      {dataService: {
+        'owner': this.owner,
+        'repo': this.repo
+        }
+      })
+    );
+  }
+  
   matchUrl(url?: string | null): void {
     const regx = '\/\/github\.com\/(.+)\/(.+)';
     if(url !== null){

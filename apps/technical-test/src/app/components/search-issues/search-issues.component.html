@@ -11,12 +11,9 @@
         <mat-error>La dirección del repositorio es obligarioria</mat-error>
       }
     </mat-form-field>
-    <button class="search-issues__form__button-submit" mat-fab extended type="submit" (click)="onSubmit()">
+    <button [routerLink]="'/tabla'" class="search-issues__form__button-submit" mat-fab extended type="submit" (click)="onSubmit()" >
       <mat-icon>search</mat-icon>
       Buscar
     </button>
   </form>
-  @if (loadingTable) {
-    <tech-table-issues></tech-table-issues>
-  }
 </section>

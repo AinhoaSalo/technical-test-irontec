@@ -1,57 +1,71 @@
-@defer(when issuesData.length !== 0){
-  <section class="table-issues">
-    <table mat-table [dataSource]="currentPageData" class="mat-elevation-z8">
-      <ng-container matColumnDef="number">
-        <th mat-header-cell *matHeaderCellDef> Numero Issue </th>
-        <td mat-cell *matCellDef="let data">{{data.number}}</td>
-      </ng-container>
-      <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef>Estado</th>
-        <td mat-cell *matCellDef="let data">{{data.state}}</td>
-      </ng-container>
-      <ng-container matColumnDef="created">
-        <th mat-header-cell *matHeaderCellDef>Fecha creación</th>
-        <td mat-cell *matCellDef="let data">{{data.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
-      </ng-container>
-      <ng-container matColumnDef="updated">
-        <th mat-header-cell *matHeaderCellDef>Fecha modificación</th>
-        <td mat-cell *matCellDef="let data">
-          @if (data.updated_at) { 
-            {{data.updated_at | date: 'dd/MM/yyyy HH:mm'}}
-          } @else {
-            No ha sido modificda
-          }
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="closed">
-        <th mat-header-cell *matHeaderCellDef>Fecha cerrada</th>
-        <td mat-cell *matCellDef="let data">
-          @if (data.closed_at) {
-            {{data.closed_at | date: 'dd/MM/yyyy HH:mm'}}  
-          } @else {
-            No ha sido cerrada
-          }
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="url">
-        <th mat-header-cell *matHeaderCellDef>Url</th>
-        <td mat-cell *matCellDef="let data">{{data.html_url}}</td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <tech-paginator  
-      [totalItems]="issuesData.length"
-      [pageSize]="10"
-      (pageChanged)="onPageChanged($event)">
-    </tech-paginator>
-  </section>
-}
-@placeholder {
-  <tech-spinner></tech-spinner>
-}
-@loading {
-  <tech-spinner></tech-spinner>
-}
+
+<section class="table">
+  <button class="table__button" [routerLink]="'/buscar'" mat-fab extended >
+    <mat-icon>search</mat-icon>
+    Volver a Buscar
+  </button>
+    @defer (when dataStatus || errorStatus){
+      @if (errorStatus) {
+        <article class="table__error">
+          <p class="table__error__description">Este repositorio puede que no tenga incidencias o que haya ocurrido un error. Por favor, verifique que la URL es correcta o que el repositorio tiene incidencias.</p>
+        </article>
+      } @else if (dataStatus) {
+        <article class="table__issues">
+          <table mat-table [dataSource]="currentPageData" class="mat-elevation-z8">
+            <ng-container matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef> Numero Incidencia </th>
+              <td mat-cell *matCellDef="let data">{{data.number}}</td>
+            </ng-container>
+            <ng-container matColumnDef="state">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let data">{{data.state}}</td>
+            </ng-container>
+            <ng-container matColumnDef="created">
+              <th mat-header-cell *matHeaderCellDef>Fecha creación</th>
+              <td mat-cell *matCellDef="let data">{{data.created_at | date: 'dd/MM/yyyy HH:mm'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="updated">
+              <th mat-header-cell *matHeaderCellDef>Fecha modificación</th>
+              <td mat-cell *matCellDef="let data">
+                @if (data.updated_at) { 
+                  {{data.updated_at | date: 'dd/MM/yyyy HH:mm'}}
+                } @else {
+                  No ha sido modificada
+                }
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="closed">
+              <th mat-header-cell *matHeaderCellDef>Fecha cerrada</th>
+              <td mat-cell *matCellDef="let data">
+                @if (data.closed_at) {
+                  {{data.closed_at | date: 'dd/MM/yyyy HH:mm'}}  
+                } @else {
+                  No ha sido cerrada
+                }
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="url">
+              <th mat-header-cell *matHeaderCellDef>Url</th>
+              <td mat-cell *matCellDef="let data">{{data.html_url}}</td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <tech-paginator  
+            [totalItems]="issuesData.length"
+            [pageSize]="10"
+            (pageChanged)="onPageChanged($event)">
+          </tech-paginator>
+        </article>
+      }
+    }
+    @placeholder {
+      <tech-spinner></tech-spinner>
+    }
+    @loading {
+      <tech-spinner></tech-spinner>
+    }
+ 
+</section>
 
