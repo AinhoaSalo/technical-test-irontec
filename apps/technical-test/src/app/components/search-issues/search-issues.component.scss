@@ -1,0 +1,29 @@
+.search-issues{
+  margin-block-start: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  
+    &__input {
+      width: 70%;
+      max-width: 35rem;
+      margin-inline-end: 1rem;
+    }
+    
+  }
+
+  .mat-mdc-fab, .mat-mdc-mini-fab {
+    background-color: rgb(226, 215, 195);
+    color: rgb(104, 103, 103);
+  }
+
+  .mat-mdc-fab:hover {
+    background-color:#AEB6D8;
+  }
+}

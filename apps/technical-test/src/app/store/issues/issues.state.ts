@@ -1,3 +1,6 @@
+import { IssueData } from "../../models/issues-data.interface";
+import { ErrorsIssuesState } from "../../models/issues-state.interface";
+
 export const ISSUES_REPO_GITHUB = 'Issues';
 
 export interface IssuesState {
@@ -6,7 +9,6 @@ export interface IssuesState {
 
 export interface IssuesDataState {
     isLoading: boolean,
-    data: any,
-    error: string | null
-
+    data: IssueData[],
+    error: ErrorsIssuesState
 }

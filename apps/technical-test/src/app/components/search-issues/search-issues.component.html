@@ -1,0 +1,22 @@
+
+<section class="search-issues">
+  <form class="search-issues__form">
+    <mat-form-field class="search-issues__form__input">
+      <mat-label>Direccion repositorio</mat-label>
+      <input type="url" matInput [formControl]="urlFormControl" placeholder='Ej.: https://github.com/"nombre propietario"/"nombre repositorio"'>
+      @if (urlFormControl.hasError('pattern') && !urlFormControl.hasError('required')) {
+        <mat-error>Por favor, introduce una url válida</mat-error>
+      }
+      @if (urlFormControl.hasError('required')) {
+        <mat-error>La dirección del repositorio es obligarioria</mat-error>
+      }
+    </mat-form-field>
+    <button class="search-issues__form__button-submit" mat-fab extended type="submit" (click)="onSubmit()">
+      <mat-icon>search</mat-icon>
+      Buscar
+    </button>
+  </form>
+  @if (loadingTable) {
+    <tech-table-issues></tech-table-issues>
+  }
+</section>

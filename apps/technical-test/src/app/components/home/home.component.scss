@@ -1,0 +1,41 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 9.5rem;
+  left: 0;
+  right: 0;
+
+  &__card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 65%;
+    min-height: 26rem;
+    background-color:rgb(226, 215, 195);
+    border-radius: 1rem;
+
+    &__title {
+      margin: 1% 5%;
+      text-align: center;
+      color: rgb(104, 103, 103);
+    }
+  
+    &__button {
+      margin-block-start: 5%;
+      padding: 1rem 4.25rem;
+      background-color: #b89bb3;
+      color: white;
+      border: none;
+      border-radius: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    &__button:hover {
+      background-color:#AEB6D8;
+    }
+  }
+}

@@ -1,3 +1,14 @@
-table {
-  width: 100%;
+.table-issues {
+    margin-block-start: 1rem;
+}
+
+.mat-mdc-table th {
+    background-color: #E3D9C5;
+}
+
+.mat-mdc-table tr:nth-child(even) {
+    background-color: rgb(238, 231, 217);
+}
+.mat-mdc-table tr:nth-child(odd) {
+    background-color: #f7f4ee;
 }

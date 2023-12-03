@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
-import { IssuesComponent } from './components/issues/issues.component';
+import { SearchIssuesComponent } from './components/search-issues/search-issues.component';
 
 @Component({
   standalone: true,
@@ -14,7 +14,7 @@ import { IssuesComponent } from './components/issues/issues.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    IssuesComponent,
+    SearchIssuesComponent,
   ],
   selector: 'ainhoa-salo-root',
   templateUrl: './app.component.html',

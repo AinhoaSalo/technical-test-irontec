@@ -1,14 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'tech-header',
   standalone: true,
-  imports: [CommonModule, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule],
+  imports: [
+    CommonModule, 
+    MatToolbarModule, 
+    MatButtonModule, 
+    MatIconModule,
+    RouterModule
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

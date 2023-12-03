@@ -1,10 +1,12 @@
-import { createActionGroup, props} from '@ngrx/store'
+import { createActionGroup, props} from '@ngrx/store';
+import { IssueData } from '../../models/issues-data.interface';
+import { DataServiceState, ErrorsIssuesState } from '../../models/issues-state.interface';
 
 export const issuesActions = createActionGroup({
     source: 'Issues',
     events:{
-        'Issues Loading': props<{isLoading: boolean}>(),
-        'Issues success': props<{data: any}>(),
-        'Issues error': props<{error: string | null}>()
+        'Issues data service': props<{dataService: DataServiceState}>(),
+        'Issues success': props<{data: IssueData[]}>(),
+        'Issues error': props<{error: ErrorsIssuesState}>()
     }
 })
