@@ -5,11 +5,11 @@
     Volver a Buscar
   </button>
     @defer (when dataStatus || errorStatus){
-      @if (errorStatus) {
+      @if (errorStatus || issuesData.length === 0) {
         <article class="table__error">
           <p class="table__error__description">Este repositorio puede que no tenga incidencias o que haya ocurrido un error. Por favor, verifique que la URL es correcta o que el repositorio tiene incidencias.</p>
         </article>
-      } @else if (dataStatus) {
+      } @else if (issuesData.length !== 0) {
         <article class="table__issues">
           <table mat-table [dataSource]="currentPageData" class="mat-elevation-z8">
             <ng-container matColumnDef="number">
